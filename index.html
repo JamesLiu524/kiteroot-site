@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>James 的主页</title>
+  <style>
+    body {
+      font-family: system-ui, "Microsoft YaHei", sans-serif;
+      max-width: 640px;
+      margin: 60px auto;
+      padding: 0 16px;
+      line-height: 1.7;
+      color: #333;
+    }
+    h1 { color: #d62828; }
+    .tag { display: inline-block; background: #e8f1f8; padding: 2px 10px; border-radius: 12px; margin: 2px; }
+    .card {
+      display: block;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: #333;
+    }
+    .card:hover { border-color: #d62828; }
+    .card strong { color: #d62828; }
+    a { color: #d62828; }
+  </style>
+</head>
+<body>
+  <h1>你好，我是 James 👋</h1>
+  <p>这是我在自己的服务器上用 Nginx 搭建的第一个网页。</p>
+
+  <h2>我的博客</h2>
+  <a class="card" href="https://blog.kiteroot.com">
+    <strong>Kiteroot 笔记 →</strong><br>
+    记录我学技术、搭网站的过程，还有踩过的坑。
+  </a>
+
+  <h2>我在学</h2>
+  <p>
+    <span class="tag">Linux</span>
+    <span class="tag">Nginx</span>
+    <span class="tag">建站</span>
+    <span class="tag">HTML</span>
+    <span class="tag">PHP</span>
+    <span class="tag">MariaDB</span>
+    <span class="tag">WordPress</span>
+  </p>
+
+  <h2>下一步计划</h2>
+  <ul>
+    <li>✅ 绑定域名 + HTTPS</li>
+    <li>✅ <a href="https://blog.kiteroot.com">WordPress 博客</a></li>
+    <li>自己写动态网站</li>
+    <li>Docker 部署</li>
+  </ul>
+</body>
+</html>
