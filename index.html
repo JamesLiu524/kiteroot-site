@@ -5,56 +5,215 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>James 的主页</title>
   <style>
+    /* ===== 全局 ===== */
+    * { box-sizing: border-box; }
     body {
-      font-family: system-ui, "Microsoft YaHei", sans-serif;
-      max-width: 640px;
-      margin: 60px auto;
-      padding: 0 16px;
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #fbfaf7;
+      color: #1f2430;
       line-height: 1.7;
-      color: #333;
     }
-    h1 { color: #d62828; }
-    .tag { display: inline-block; background: #e8f1f8; padding: 2px 10px; border-radius: 12px; margin: 2px; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+    a { color: inherit; }
+
+    /* ===== 导航栏（和留言板保持一致）===== */
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid #eee;
+      font-size: 15px;
+    }
+    .site-nav a { color: #555; text-decoration: none; }
+    .site-nav .brand { color: #d62828; font-weight: 600; }
+    .site-nav .links { display: flex; gap: 16px; }
+    .site-nav .links a:hover { color: #d62828; }
+    .site-nav .links a.active { color: #d62828; font-weight: 600; }
+
+    /* ===== 开头介绍 ===== */
+    .hero { padding: 40px 0 48px; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: #d62828;
+      background: #fdecec;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 44px;
+      line-height: 1.2;
+      margin: 0 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .hero h1 .accent { color: #d62828; }
+    .hero p { font-size: 18px; color: #555b66; margin: 0; max-width: 560px; }
+
+    /* ===== 小节标题 ===== */
+    h2 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #8a8f99;
+      margin: 48px 0 16px;
+    }
+
+    /* ===== 项目卡片 ===== */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
     .card {
-      display: block;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid #ecebe6;
+      border-radius: 14px;
+      padding: 20px;
       text-decoration: none;
-      color: #333;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
     }
-    .card:hover { border-color: #d62828; }
-    .card strong { color: #d62828; }
-    a { color: #d62828; }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #d62828;
+      box-shadow: 0 6px 20px rgba(214, 40, 40, 0.08);
+    }
+    .card .icon { font-size: 26px; }
+    .card h3 { margin: 0; font-size: 18px; }
+    .card p { margin: 0; color: #555b66; font-size: 15px; flex: 1; }
+    .card .go { color: #d62828; font-size: 14px; font-weight: 600; }
+
+    /* ===== 技术标签 ===== */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 14px;
+      background: #fff;
+      border: 1px solid #ecebe6;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    /* ===== 学习路线（时间线）===== */
+    .timeline { list-style: none; margin: 0; padding: 0; }
+    .timeline li {
+      position: relative;
+      padding: 0 0 20px 32px;
+      border-left: 2px solid #ecebe6;
+      margin-left: 8px;
+    }
+    .timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fbfaf7;
+      border: 2px solid #c9c7c0;
+    }
+    .timeline li.done::before { background: #d62828; border-color: #d62828; }
+    .timeline li.next::before { border-color: #d62828; }
+    .timeline strong { display: block; }
+    .timeline span { font-size: 14px; color: #8a8f99; }
+
+    /* ===== 页脚 ===== */
+    footer {
+      margin-top: 64px;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+      font-size: 13px;
+      color: #8a8f99;
+      display: flex;
+      justify-content: space-between;
+    }
+    footer a { text-decoration: none; }
+    footer a:hover { color: #d62828; }
+
+    /* ===== 手机屏幕 ===== */
+    @media (max-width: 520px) {
+      .hero h1 { font-size: 34px; }
+      .hero p { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
-  <h1>你好，我是 James 👋</h1>
-  <p>这是我在自己的服务器上用 Nginx 搭建的第一个网页。</p>
+  <div class="wrap">
 
-  <h2>我的博客</h2>
-  <a class="card" href="https://blog.kiteroot.com">
-    <strong>Kiteroot 笔记 →</strong><br>
-    记录我学技术、搭网站的过程，还有踩过的坑。
-  </a>
+    <nav class="site-nav">
+      <a class="brand" href="https://kiteroot.com">🪁 kiteroot</a>
+      <div class="links">
+        <a href="https://kiteroot.com" class="active">主页</a>
+        <a href="https://blog.kiteroot.com">博客</a>
+        <a href="https://guestbook.kiteroot.com">留言板</a>
+      </div>
+    </nav>
 
-  <h2>我在学</h2>
-  <p>
-    <span class="tag">Linux</span>
-    <span class="tag">Nginx</span>
-    <span class="tag">建站</span>
-    <span class="tag">HTML</span>
-    <span class="tag">PHP</span>
-    <span class="tag">MariaDB</span>
-    <span class="tag">WordPress</span>
-  </p>
+    <header class="hero">
+      <span class="eyebrow">LINUX · 建站 · 后端</span>
+      <h1>你好，我是 <span class="accent">James</span> 👋</h1>
+      <p>在一台 1G 内存的服务器上，从零搭网站、写后端、学运维。这里记录我做过的东西。</p>
+    </header>
 
-  <h2>下一步计划</h2>
-  <ul>
-    <li>✅ 绑定域名 + HTTPS</li>
-    <li>✅ <a href="https://blog.kiteroot.com">WordPress 博客</a></li>
-    <li>自己写动态网站</li>
-    <li>Docker 部署</li>
-  </ul>
+    <h2>我做的东西</h2>
+    <div class="cards">
+      <a class="card" href="https://blog.kiteroot.com">
+        <span class="icon">📝</span>
+        <h3>Kiteroot 笔记</h3>
+        <p>记录学技术、搭网站的过程，还有踩过的坑。</p>
+        <span class="go">去看看 →</span>
+      </a>
+      <a class="card" href="https://guestbook.kiteroot.com">
+        <span class="icon">✍️</span>
+        <h3>留言板</h3>
+        <p>用 Python + Flask 从零写的动态网站，欢迎留言。</p>
+        <span class="go">去留言 →</span>
+      </a>
+      <a class="card" href="https://github.com/JamesLiu524">
+        <span class="icon">💻</span>
+        <h3>源代码</h3>
+        <p>主页和留言板的代码都在 GitHub 上公开。</p>
+        <span class="go">GitHub →</span>
+      </a>
+    </div>
+
+    <h2>我在用的技术</h2>
+    <div class="tags">
+      <span class="tag">Linux</span>
+      <span class="tag">Nginx</span>
+      <span class="tag">HTML / CSS</span>
+      <span class="tag">Python</span>
+      <span class="tag">Flask</span>
+      <span class="tag">SQLite</span>
+      <span class="tag">MariaDB</span>
+      <span class="tag">PHP</span>
+      <span class="tag">WordPress</span>
+      <span class="tag">Git</span>
+    </div>
+
+    <h2>学习路线</h2>
+    <ol class="timeline">
+      <li class="done"><strong>静态个人主页</strong><span>Nginx + 手写 HTML</span></li>
+      <li class="done"><strong>域名 + HTTPS</strong><span>Cloudflare DNS + Let’s Encrypt</span></li>
+      <li class="done"><strong>WordPress 博客</strong><span>Nginx + PHP + MariaDB</span></li>
+      <li class="done"><strong>Git + GitHub 部署</strong><span>本地 → GitHub → 服务器</span></li>
+      <li class="done"><strong>自己写动态网站</strong><span>Flask 留言板，Gunicorn + systemd</span></li>
+      <li class="next"><strong>Docker 部署</strong><span>下一步</span></li>
+    </ol>
+
+    <footer>
+      <span>© 2026 kiteroot</span>
+      <a href="https://github.com/JamesLiu524/kiteroot-site">本站源码</a>
+    </footer>
+
+  </div>
 </body>
 </html>
